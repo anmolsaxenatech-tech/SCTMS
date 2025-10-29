@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart College Transport Management System</title>
+    <link rel="stylesheet" href="driver-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <img src="logo-sage.webp" alt="logo">
+        </div>
+    </header>
+    <div class="nav-body">
+       <div class="badi-img">
+            <img src="sagepic.webp" class="sage-img">
+            <div class="overlay"></div>
+        <div class="driver-dashboard-box">
+        <h2> SMART COLLEGE TRANSPORT MANAGEMENT SYSTEM (SCTMS)</h2>
+        <div class="main-head">
+            <h1>Dashboard</h1>
+            <input type="text" id="busName" placeholder="Enter Driver Name">
+    <select id="busSelect">
+      <option value="bus1">Bus No.1</option>
+      <option value="bus2">Bus No.2</option>
+      <option value="bus3">Bus No.3</option>
+    </select>
+    <br>
+    <button id="startBtn">Start Journey</button>
+    <button id="stopBtn">End Journey</button>
+    <div id="map"></div>
+        </div>
+       </div>
+       </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi3JQ1mY_1luIPUPvx2LJvaXi-M5hwJ_k"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, set, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCx1RXX7qFxYGcz79Dg5DKNFaFSz_-jlz0",
+      authDomain: "sctms-8582c.firebaseapp.com",
+      databaseURL: "https://sctms-8582c-default-rtdb.firebaseio.com",
+      projectId: "sctms-8582c",
+      storageBucket: "sctms-8582c.firebasestorage.app",
+      messagingSenderId: "329860362397",
+      appId: "1:329860362397:web:8ec60cdefa028aaaef6474",
+      measurementId: "G-RELYJ50BKY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    let map, marker, watchId = null;
+    function initMap(lat = 23.2599, lng = 77.4126) {
+      map = new google.maps.Map(document.getElementById("map"), { zoom: 14, center: { lat, lng } });
+      marker = new google.maps.Marker({ position: { lat, lng }, map, title: "Bus Location" });
+    }
+    initMap();
+
+    const startBtn = document.getElementById("startBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const busSelect = document.getElementById("busSelect");
+    const busNameInput = document.getElementById("busName");
+
+    startBtn.addEventListener("click", () => {
+      const bus = busSelect.value;
+      const driverName = busNameInput.value.trim() || "Unknown Driver";
+
+      if (navigator.geolocation) {
+        watchId = navigator.geolocation.watchPosition((pos) => {
+          const { latitude, longitude } = pos.coords;
+          set(ref(db, "buses/" + bus), {
+            driverName,
+            lat: latitude,
+            lng: longitude,
+            timestamp: Date.now(),
+          });
+          marker.setPosition({ lat: latitude, lng: longitude });
+          map.panTo({ lat: latitude, lng: longitude });
+        });
+        alert(`${bus} tracking started by ${driverName}`);
+      } else alert("Geolocation not supported!");
+    });
+
+    stopBtn.addEventListener("click", () => {
+      const bus = busSelect.value;
+      if (watchId) navigator.geolocation.clearWatch(watchId);
+      remove(ref(db, "buses/" + bus));
+      alert(`${bus} journey ended`);
+    });
+  </script>
+</body>
+</html>

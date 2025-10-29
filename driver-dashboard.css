@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    border: border-box;
+}
+.nav-bar img {
+    width: 70%; 
+    height: 110px;
+    padding-top: 2px;
+}
+.nav-bar{
+    text-align: center;
+    background-color: rgba(197, 5, 5, 0.868);
+}
+.nav-body {
+  width: 100%;
+  position: relative
+}
+.driver-dashboard-box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 650px;
+  height: 600px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.sage-img{
+  width: 100%;
+  height: 750px;
+  background-size: cover;        
+  background-position: center;    
+  background-repeat: no-repeat;
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.main-head{
+    padding-top: 30px;
+}
+.nav-bar-driver{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 15px;
+}
+.location{
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 60px;
+}

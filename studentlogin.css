@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    border: border-box;
+}
+h4{
+    padding-top: 20px;
+}
+.studentlogin1{
+    padding-top: 20px;
+}
+.userstudent{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.driverlogin1{
+    padding-top: 20px;
+}
+.userdriver{
+     padding-top: 15px;
+    padding-bottom: 15px;
+}

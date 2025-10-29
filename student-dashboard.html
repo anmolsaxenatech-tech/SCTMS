@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart College Transport Management System</title>
+    <link rel="stylesheet" href="student-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <img src="logo-sage.webp" alt="logo">
+        </div>
+    </header>
+    <div class="nav-body">
+       <div class="badi-img">
+            <img src="sagepic.webp" class="sage-img">
+            <div class="overlay"></div>
+        <div class="student-dashboard-box">
+        <h2> SMART COLLEGE TRRANSPORT MANAGEMENT SYSTEM (SCTMS)</h2>
+        <div class="main-head">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="nav-bar-student">
+            <div class="div1">
+                 <a href="student-dashboard.html">Live Tracking</a>
+            </div>
+            <div class="div2">
+                <a href="driver-details.html">Driver Details</a>
+            </div>
+            <div class="div3">
+                <a href="E-Bus-pass.html">E-Bus Pass</a>
+            </div>
+            </div>
+            <select id="busSelect">
+      <option value="bus1">Bus No.1</option>
+      <option value="bus2">Bus No.2</option>
+      <option value="bus3">Bus No.3</option>
+    </select>
+    <br>
+    <button id="trackBtn">Track Bus</button>
+    <div id="map">
+
+    </div>
+       </div>
+       </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi3JQ1mY_1luIPUPvx2LJvaXi-M5hwJ_k"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCx1RXX7qFxYGcz79Dg5DKNFaFSz_-jlz0",
+      authDomain: "sctms-8582c.firebaseapp.com",
+      databaseURL: "https://sctms-8582c-default-rtdb.firebaseio.com",
+      projectId: "sctms-8582c",
+      storageBucket: "sctms-8582c.appspot.com",
+      messagingSenderId: "329860362397",
+      appId: "1:329860362397:web:8ec60cdefa028aaaef6474",
+      measurementId: "G-RELYJ50BKY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    let map, marker;
+
+    function initMap(lat = 23.2599, lng = 77.4126) {
+      map = new google.maps.Map(document.getElementById("map"), { zoom: 14, center: { lat, lng } });
+      marker = new google.maps.Marker({ position: { lat, lng }, map, title: "Bus Location" });
+    }
+    initMap();
+
+    const busSelect = document.getElementById("busSelect");
+    const trackBtn = document.getElementById("trackBtn");
+
+    trackBtn.addEventListener("click", () => {
+      const bus = busSelect.value;
+      const busRef = ref(db, "buses/" + bus);
+
+      onValue(busRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const { lat, lng } = data;
+          marker.setPosition({ lat, lng });
+          map.panTo({ lat, lng });
+        } else {
+          alert("Bus not active right now!");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
