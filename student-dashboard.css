@@ -46,7 +46,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 .main-head{
-    padding-top: 30px;
+    padding-top: 25px;
 }
 .nav-bar-student{
     display: flex;
@@ -60,10 +60,6 @@
 .div3{
     margin-left: 30px;
 }
-/* .map{
-    margin-top: 60px;
-    margin-left: 320px;
-} */
 .foot{
     text-align: center;
 }
@@ -78,4 +74,3 @@
     margin-top: 15px;
     margin-bottom: 10px;
 }
-
