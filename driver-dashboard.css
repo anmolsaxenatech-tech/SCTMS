@@ -18,14 +18,14 @@
 }
 .driver-dashboard-box{
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   width: 650px;
-  height: 600px;
+  height: 300px;
   text-align: center;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -58,4 +58,8 @@
     margin-top: 50px;
     text-align: left;
     padding-left: 60px;
+}
+.head{
+  padding-top: 30px;
+  font-size: 30px;
 }
