@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart College Transport Management System</title>
+    <link rel="stylesheet" href="driver-details.css">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <img src="logo-sage.webp" alt="logo">
+        </div>
+    </header>
+    <div class="nav-body">
+       <div class="badi-img">
+            <img src="sagepic.webp" class="sage-img">
+            <div class="overlay"></div>
+        <div class="student-dashboard-box">
+        <h2> SMART COLLEGE TRANSPORT MANAGEMENT SYSTEM (SCTMS)</h2>
+        <div class="main-head">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="nav-bar-student">
+            <div class="div1">
+                 <a href="student-dashboard.html">Live Tracking</a>
+            </div>
+            <div class="div2">
+                <a href="driver-details.html">Driver Details</a>
+            </div>
+            <div class="div3">
+                <a href="student-details.html">Student Details</a>
+            </div>
+            </div>
+        <div class="container">
+                <h2>Search Driver Details</h2>
+    <div class="container2">
+        <label for="busSelect">Select Bus Number:</label>
+    <select id="busSelect">
+      <option value="">-- Select Bus --</option>
+      <option value="bus1">Bus No. 1</option>
+      <option value="bus2">Bus No. 2</option>
+      <option value="bus3">Bus No. 3</option>
+    </select>
+
+    <button onclick="searchDriver()">Search</button>
+
+    <div id="driverDetails" class="details"></div>
+    </div>
+  </div>
+
+  <script>
+    const drivers = {
+      bus1: {
+        name: "Rakesh Kumar",
+        phone: "9876543210",
+        route: "Minal Gate → Ayodhya Bypass → SAGE University",
+        busNumber: "MP04 AB 2345"
+      },
+      bus2: {
+        name: "Sanjay Singh",
+        phone: "9988776655",
+        route: "Nadra Bus Stand → Lalghati → SAGE University",
+        busNumber: "MP04 CD 4521"
+      },
+      bus3: {
+        name: "Amit Yadav",
+        phone: "9823456789",
+        route: "Ashoka Garden → BHEL → SAGE University",
+        busNumber: "MP04 EF 9876"
+      }
+    };
+
+    function searchDriver() {
+      const select = document.getElementById("busSelect");
+      const detailsBox = document.getElementById("driverDetails");
+      const busId = select.value;
+
+      if (!busId) {
+        detailsBox.innerHTML = `<p class="no-data">⚠️ Please select a bus number.</p>`;
+        return;
+      }
+
+      const driver = drivers[busId];
+
+      if (driver) {
+        detailsBox.innerHTML = `
+          <h3>Driver Information</h3>
+          <p><b>Name:</b> ${driver.name}</p>
+          <p><b>Phone:</b> ${driver.phone}</p>
+          <p><b>Bus Number:</b> ${driver.busNumber}</p>
+          <p><b>Route:</b> ${driver.route}</p>
+        `;
+      } else {
+        detailsBox.innerHTML = `<p class="no-data">❌ No driver found for this bus.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
