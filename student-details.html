@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart College Transport Management System</title>
+  <link rel="stylesheet" href="student-details.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+      <img src="logo-sage.webp" alt="logo" />
+    </div>
+  </header>
+  <div class="nav-body">
+    <div class="badi-img">
+      <img src="sagepic.webp" class="sage-img" />
+      <div class="overlay"></div>
+      <div class="student-dashboard-box">
+        <h2>SMART COLLEGE TRANSPORT MANAGEMENT SYSTEM (SCTMS)</h2>
+        <div class="main-head"><h1>Student Dashboard</h1></div>
+        <div class="nav-bar-student">
+            <div class="div1">
+                 <a href="student-dashboard.html">Live Tracking</a>
+            </div>
+            <div class="div2">
+                <a href="driver-details.html">Driver Details</a>
+            </div>
+            <div class="div3">
+                <a href="student-details.html">Student Details</a>
+            </div>
+            </div>
+        <div class="info">
+        <div class="card">
+    <h2>Student Details</h2>
+    <div id="details"></div>
+  </div>
+  <div class="info-box">
+  <script>
+    const student = JSON.parse(localStorage.getItem("studentData"));
+
+    if (!student) {
+      document.body.innerHTML = "<h2 style='text-align:center;color:red;'>No student data found!</h2>";
+    } else {
+      const detailsDiv = document.getElementById("details");
+      detailsDiv.innerHTML = `
+        <p><strong>Name:</strong> ${student.name}</p>
+        <p><strong>Department:</strong> ${student.department}</p>
+        <p><strong>Course:</strong> ${student.course}</p>
+        <p><strong>Bus:</strong> ${student.bus}</p>
+        <p><strong>Pickup Location:</strong> ${student.pickup}</p>
+        <p><strong>Drop Location:</strong> ${student.drop}</p>
+      `;
+    }
+  </script>
+  </div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
