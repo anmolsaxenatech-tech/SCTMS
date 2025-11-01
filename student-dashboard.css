@@ -72,4 +72,9 @@
     height: 400px; /* ya jitni height chahiye */
     border: 2px solid black;
     margin-top: 10px;
+
   }
+.press{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
